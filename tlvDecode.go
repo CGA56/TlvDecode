@@ -61,9 +61,8 @@ func createWrapper(data map[int]map[string]string, msje string) *wrapper {
 	return &wrapper
 }
 
-func populate(tlvExample string) *wrapper {
-
-	var dataExample = tlvExample
+func populate(tlvExample []byte) *wrapper {
+	var dataExample = string(tlvExample[:])
 	var data *tlv
 
 	for range dataExample {
@@ -78,7 +77,7 @@ func populate(tlvExample string) *wrapper {
 }
 
 func main() {
-	const tlvExample string = "11A05AB398765UJ102N2300"
+	arr := []byte{49, 49, 65, 48, 53, 65, 66, 51, 57, 56, 55, 54, 53, 85, 74, 49, 48, 50, 78, 50, 51, 48, 48}
 	defer func() {
 		if err := recover(); err != nil {
 			str := "status :" + fmt.Sprint(err)
@@ -86,7 +85,7 @@ func main() {
 		}
 	}()
 
-	var result = populate(tlvExample)
+	var result = populate(arr)
 	fmt.Println(result)
 
 }
